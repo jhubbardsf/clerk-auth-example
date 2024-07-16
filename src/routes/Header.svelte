@@ -2,6 +2,10 @@
 	import { page } from '$app/stores';
 	import logo from '$lib/images/svelte-logo.svg';
 	import github from '$lib/images/github.svg';
+	// Clerk
+	import UserButton from 'clerk-sveltekit/client/UserButton.svelte';
+	import SignedIn from 'clerk-sveltekit/client/SignedIn.svelte';
+	import SignedOut from 'clerk-sveltekit/client/SignedOut.svelte';
 </script>
 
 <header>
@@ -31,10 +35,20 @@
 		</svg>
 	</nav>
 
-	<div class="corner">
+	<div class="flex justify-center items-center h-12">
 		<a href="https://github.com/sveltejs/kit">
-			<img src={github} alt="GitHub" />
+			<img class="w-10" src={github} alt="GitHub" />
 		</a>
+
+		<!-- Clerk Start -->
+		<SignedIn>
+			<UserButton afterSignOutUrl="/" />
+		</SignedIn>
+		<SignedOut>
+			<a href="/sign-in">Sign in</a> <span>|</span> <a href="/sign-up">Sign up</a>
+			<!-- You could also use <SignInButton mode="modal" /> and <SignUpButton mode="modal" /> here -->
+		</SignedOut>
+		<!-- Clerk End -->
 	</div>
 </header>
 
@@ -42,11 +56,6 @@
 	header {
 		display: flex;
 		justify-content: space-between;
-	}
-
-	.corner {
-		width: 3em;
-		height: 3em;
 	}
 
 	.corner a {
