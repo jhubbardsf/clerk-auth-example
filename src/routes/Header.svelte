@@ -6,6 +6,7 @@
 	import UserButton from 'clerk-sveltekit/client/UserButton.svelte';
 	import SignedIn from 'clerk-sveltekit/client/SignedIn.svelte';
 	import SignedOut from 'clerk-sveltekit/client/SignedOut.svelte';
+	import SignInButton from 'clerk-sveltekit/client/SignInButton.svelte';
 </script>
 
 <header>
@@ -45,6 +46,7 @@
 			<UserButton afterSignOutUrl="/" />
 		</SignedIn>
 		<SignedOut>
+			<SignInButton mode="modal" />
 			<a href="/sign-in">Sign in</a> <span>|</span> <a href="/sign-up">Sign up</a>
 			<!-- You could also use <SignInButton mode="modal" /> and <SignUpButton mode="modal" /> here -->
 		</SignedOut>
@@ -52,7 +54,18 @@
 	</div>
 </header>
 
-<style>
+<style lang="postcss">
+	:global(.cl-modalContent) {
+		@apply self-center;
+
+		:global(.cl-headerSubtitle) {
+			@apply flex justify-center;
+		}
+		:global(.cl-footer + div) {
+			@apply hidden;
+		}
+	}
+
 	header {
 		display: flex;
 		justify-content: space-between;
